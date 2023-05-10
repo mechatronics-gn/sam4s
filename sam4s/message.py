@@ -61,11 +61,9 @@ class Message:
         self.b.append(0x1B)
         self.b.append(0x4D)
         self.b.append(font.value)
-        self.b.append(0)
+        self.b.append(0x00)
 
     def add_text_double(self, double_width: bool, double_height: bool):
-        if (not double_width) and (not double_height):
-            return
         self.b.append(0x1B)
         self.b.append(0x21)
         if double_width and double_height:
@@ -74,7 +72,9 @@ class Message:
             self.b.append(0x20)
         elif double_height:
             self.b.append(0x10)
-        self.b.append(0)
+        else:
+            self.b.append(0x00)
+        self.b.append(0x00)
 
     def add_text_size(self, width: int, height: int):
         self.b.append(0x1D)
