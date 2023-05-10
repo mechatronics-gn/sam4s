@@ -41,7 +41,7 @@ message.add_text("Rotated\n")
 message.add_text_modification(TextModification.Rotate, False)
 
 message.add_text_position(16384)
-message.add_text("Text starting at 16384\n")
+message.add_text("Text starting at 16384\n") # This seems to do nothing
 message.add_text_position(0)
 
 message.add_text_double(True, True)
