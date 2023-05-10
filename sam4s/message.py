@@ -36,7 +36,7 @@ class Message:
         self.b.append(align.value)
         self.b.append(0x00)
 
-    def add_text_line_space(self, line_space: int):
+    def add_text_line_space(self, line_space: int = 60):
         self.b.append(0x1B)
         self.b.append(0x33)
         self.b.append(line_space)

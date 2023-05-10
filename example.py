@@ -55,8 +55,12 @@ message.add_text("DH Only\n")
 message.add_text_double(False, False)
 
 message.add_text_size(8, 8)
-message.add_text("8 times larger (max)\n")
+message.add_text("sz x8\n")
 message.add_text_size(1, 1)
+
+message.add_text_line_space(100)
+message.add_text("Line Space 100 " * 5 + "\n")
+message.add_text_line_space() # set to default
 
 message.add_text("Finalize with 4 line feeds and a cut with some unit feeds\n")
 message.add_feed_line(4)
