@@ -85,8 +85,8 @@ class Message:
     def add_text_position(self, pos: int):
         self.b.append(0x1B)
         self.b.append(0x24)
-        self.b.append(pos // 256)
         self.b.append(pos % 256)
+        self.b.append(pos // 256)
         self.b.append(0x00)
 
     def add_text_modification(self, modification: TextModification, flag: bool):
