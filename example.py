@@ -1,4 +1,6 @@
-from sam4s.message import Message, TextLanguage, TextModification, TextFont, TextAlign
+from sam4s.message import Message
+from sam4s.text import TextLanguage, TextModification, TextFont, TextAlign
+from sam4s.barcode import BarcodeType, BarcodeHri, BarcodeFont, Barcode
 import serial
 
 message = Message()
@@ -61,6 +63,11 @@ message.add_text_size(1, 1)
 message.add_text_line_space(100)
 message.add_text("Line Space 100 " * 5 + "\n")
 message.add_text_line_space() # set to default
+
+message.add_text_align(TextAlign.CENTER)
+barcode = Barcode("Barcode Test", BarcodeType.CODE93, BarcodeHri.BELOW, BarcodeFont.A, 3, 162) # I recommend sticking to Code93 since it has the least limitations
+message.add_barcode(barcode)
+message.add_text_align(TextAlign.LEFT)
 
 message.add_text("Finalize with 4 line feeds and a cut with some unit feeds\n")
 message.add_feed_line(4)

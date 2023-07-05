@@ -1,28 +1,5 @@
-from enum import Enum
-
-
-class TextAlign(Enum):
-    LEFT = 0
-    CENTER = 1
-    RIGHT = 2
-
-
-class TextLanguage(Enum):
-    EN = 0
-    KO = 13
-
-
-class TextFont(Enum):
-    A = 0
-    B = 1
-
-
-class TextModification(Enum):
-    Rotate = (0x1B, 0x56)
-    Reverse = (0x1D, 0x42)
-    Bold = (0x1B, 0x45)
-    Underline = (0x1B, 0x2D)
-    UpsideDown = (0x1B, 0x7B)
+from sam4s.text import TextAlign, TextFont, TextLanguage, TextModification
+from sam4s.barcode import Barcode
 
 
 class Message:
@@ -113,6 +90,27 @@ class Message:
         self.b.append(0x1D)
         self.b.append(0x56)
         self.b.append(0x31)
+        self.b.append(0x00)
+
+    def add_barcode(self, barcode: Barcode):
+        self.b.append(0x1D)
+        self.b.append(0x48)
+        self.b.append(barcode.hri.value)
+        self.b.append(0x1D)
+        self.b.append(0x66)
+        self.b.append(barcode.font.value)
+        self.b.append(0x1D)
+        self.b.append(0x77)
+        self.b.append(barcode.width)
+        self.b.append(0x1D)
+        self.b.append(0x68)
+        self.b.append(barcode.height)
+        self.b.append(0x1D)
+        self.b.append(0x6B)
+        self.b.append(barcode.btype.to_byte())
+        data = bytes(barcode.data, 'ascii')
+        self.b.append(len(data))
+        self.b += data
         self.b.append(0x00)
 
     def generate_message(self):
